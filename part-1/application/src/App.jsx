@@ -1,40 +1,31 @@
 // Render the name of the course
-const Header = (props) => {
-  return (
-    <>
-      <h1>{props.course}</h1>
-    </>
-  )
+const Header = props => {
+  console.log(props)
+  return <h1>{props.course}</h1>
 }
 
 // Render each individual part in the Content component
-const Part = (props) => {
-   return (
-    <>
-      <p>
-        {props.part} {props.exercises}
-      </p>
-    </>
-   )
+const Part = props => {
+  console.log(props)
+  return <p> {props.part} {props.exercises} </p>
 }
 
 // Render the part name and the number of exercises
-const Content = ({part1, exercises1, part2, exercises2, part3, exercises3}) => {
+const Content = (props) => {
+  console.log(props)
   return (
     <>
-      <Part part={part1} exercises={exercises1}/>
-      <Part part={part2} exercises={exercises2}/>
-      <Part part={part3} exercises={exercises3}/>
+      <Part part={props.part1} exercises={props.exercises1}/>
+      <Part part={props.part2} exercises={props.exercises2}/>
+      <Part part={props.part3} exercises={props.exercises3}/>
     </>
   )
 }
 
-const Total = (props) => {
-  return (
-    <>
-      <p>Number of exercises {props.a + props.b + props.c}</p>
-    </>
-  )
+// Render the total number of exercises
+const Total = props => {
+  console.log(props)
+  return <p>Number of exercises {props.a + props.b + props.c}</p>
 }
 
 const App = () => {
