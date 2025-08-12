@@ -3,23 +3,33 @@ import { useState } from 'react'
 const Button = (props) => <button onClick={props.action}> {props.text} </button>
 const Display = (props) => <h1> {props.text} </h1>
 
-const List = (props) => (
+const Statistics = (props) => (
   <>
     good {props.good} <br/>
     neutral {props.neutral} <br/>
     bad {props.bad} <br/>
     all {props.total} <br/>
+    average <AvgScore score={props.score} total={props.total}/> <br/>
+    positive <Positive good={props.good} total={props.total}/>
   </>
 )
 
 const AvgScore = (props) => {
   const avg = props.score / props.total
-  return <>average {avg}</>
+  return (
+    <>
+      {avg}
+    </>
+  )
 }
 
 const Positive = (props) => {
   const positive = props.good / props.total * 100
-  return <>positive {positive} %</>
+  return (
+    <>
+      {positive} %
+    </>
+  )
 }
 
 const App = () => {
@@ -61,9 +71,7 @@ const App = () => {
       <Button text="neutral" action={isNeutral}/>
       <Button text="bad" action={isBad}/>
       <Display text="statistics"/>
-      <List good={good} neutral={neutral} bad={bad} total={total}/>
-      <AvgScore score={score} total={total}/> <br/>
-      <Positive good={good} total={total}/>
+      <Statistics good={good} neutral={neutral} bad={bad} total={total} score={score}/>
     </div>
   )
 }
