@@ -2,6 +2,8 @@ import { useState } from 'react'
 
 const Button = (props) => <button onClick={props.value}>{props.text}</button>
 
+const Display = (props) => <h1>{props.text}</h1>
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -16,27 +18,38 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(Array(8).fill(0))
+  const [maxVotesIndex, setMaxVotesIndex] = useState(0)
 
-  console.log(`votes: ${votes}`)
+  // console.log(`votes: ${votes}`)
 
   const Rand = () => {    
     const value = Math.floor(Math.random() * anecdotes.length)
-    console.log(value)
+    console.log(`random index: ${value}`)
     return setSelected(value)
+  }
+
+  const MostVotes = (votesArray) => {
+    const maxIndex = votesArray.indexOf(Math.max(...votesArray)) // Get the index of the largest value in "copy"
+    setMaxVotesIndex(maxIndex) // Set the index value
   }
 
   const Vote = () => {
     const copy = [...votes] // Create a copy of votes
     copy[selected] += 1 // Change the value of copy[index] to one greater
-    setVotes(copy) // Return the copy to votes
+    setVotes(copy) // Set votes value
+    MostVotes(copy) // Call MostVotes function
   }
 
   return (
     <div>
+      <Display text="Anecdote of the day" />
       {anecdotes[selected]} <br/>
       has {votes[selected]} votes <br/>
       <Button text="vote" value={Vote}/>
       <Button text="next anecdote" value={Rand}/>
+      <Display text="Anecdote with most votes" />
+      {anecdotes[maxVotesIndex]} <br/>
+      has {votes[maxVotesIndex]} votes
     </div>
   )
 }
