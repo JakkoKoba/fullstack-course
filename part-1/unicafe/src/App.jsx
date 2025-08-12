@@ -11,32 +11,53 @@ const Statistics = (props) => {
       </>
     )
   }
-  return (
-    <>
-      good {props.good} <br/>
-      neutral {props.neutral} <br/>
-      bad {props.bad} <br/>
-      all {props.total} <br/>
-      average <AvgScore score={props.score} total={props.total}/> <br/>
-      positive <Positive good={props.good} total={props.total}/>
-    </>
-  )
-}
 
-const AvgScore = (props) => {
   const avg = props.score / props.total
+  const positive = (props.good / props.total) * 100
+
   return (
+    /*<>
+      <StatisticLine text="good" value={props.good}/>
+      <StatisticLine text="neutral" value={props.neutral}/>
+      <StatisticLine text="bad" value={props.bad}/>
+      <StatisticLine text="total" value={props.total}/>
+      <StatisticLine text="average" value={avg} />
+      <StatisticLine text="positive" value={`${positive} %`} />
+    </>*/
     <>
-      {avg}
+      <Table good={props.good} neutral={props.neutral} bad={props.bad} total={props.total} avg={avg} positive={`${positive} %`} />
     </>
   )
 }
 
-const Positive = (props) => {
-  const positive = props.good / props.total * 100
+const Table = (props) => {
+  return (
+    <table>
+      <tbody>
+        <TableRow text="good" value={props.good}/>
+        <TableRow text="neutral" value={props.neutral}/>
+        <TableRow text="bad" value={props.bad}/>
+        <TableRow text="total" value={props.total}/>
+        <TableRow text="average" value={props.avg} />
+        <TableRow text="positive" value={props.positive} />
+      </tbody>
+    </table>
+  )
+}
+
+const TableRow = (props) => {
+  return (
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.value}</td>
+    </tr>
+  )
+}
+
+const StatisticLine = (props) => {
   return (
     <>
-      {positive} %
+      {props.text} {props.value} <br/>
     </>
   )
 }
