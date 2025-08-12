@@ -15,6 +15,9 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(Array(8).fill(0))
+
+  console.log(`votes: ${votes}`)
 
   const Rand = () => {    
     const value = Math.floor(Math.random() * anecdotes.length)
@@ -22,9 +25,17 @@ const App = () => {
     return setSelected(value)
   }
 
+  const Vote = () => {
+    const copy = [...votes] // Create a copy of votes
+    copy[selected] += 1 // Change the value of copy[index] to one greater
+    setVotes(copy) // Return the copy to votes
+  }
+
   return (
     <div>
       {anecdotes[selected]} <br/>
+      has {votes[selected]} votes <br/>
+      <Button text="vote" value={Vote}/>
       <Button text="next anecdote" value={Rand}/>
     </div>
   )
