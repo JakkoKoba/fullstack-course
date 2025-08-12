@@ -3,16 +3,25 @@ import { useState } from 'react'
 const Button = (props) => <button onClick={props.action}> {props.text} </button>
 const Display = (props) => <h1> {props.text} </h1>
 
-const Statistics = (props) => (
-  <>
-    good {props.good} <br/>
-    neutral {props.neutral} <br/>
-    bad {props.bad} <br/>
-    all {props.total} <br/>
-    average <AvgScore score={props.score} total={props.total}/> <br/>
-    positive <Positive good={props.good} total={props.total}/>
-  </>
-)
+const Statistics = (props) => {
+  if (props.total == 0) {
+    return (
+      <>
+        No feedback given
+      </>
+    )
+  }
+  return (
+    <>
+      good {props.good} <br/>
+      neutral {props.neutral} <br/>
+      bad {props.bad} <br/>
+      all {props.total} <br/>
+      average <AvgScore score={props.score} total={props.total}/> <br/>
+      positive <Positive good={props.good} total={props.total}/>
+    </>
+  )
+}
 
 const AvgScore = (props) => {
   const avg = props.score / props.total
