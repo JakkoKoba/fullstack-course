@@ -1,11 +1,16 @@
 const Course = (props) => {
-  const exercises = props.course.parts.map(part => part.exercises);
+  /* const exercises = props.course.parts.map(part => part.exercises);
   const courseAmount = exercises.length
 
   let totalExercises = 0
   for (let i=0; i<courseAmount; i++) {
     totalExercises += exercises[i]
-  }
+  }*/
+
+  const array = props.course.parts
+  const totalExercises = array.reduce(
+    (sum, current) => sum + current.exercises, 0
+  )
   return (
     <>
       <Header course={props.course.name} />
