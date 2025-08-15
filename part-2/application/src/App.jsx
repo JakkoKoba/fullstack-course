@@ -1,9 +1,19 @@
-const Course = (props) => (
-  <>
-    <Header course={props.course.name} />
-    <Content parts={props.course.parts} />
-  </>
-)
+const Course = (props) => {
+  const exercises = props.course.parts.map(part => part.exercises);
+  const courseAmount = exercises.length
+
+  let totalExercises = 0
+  for (let i=0; i<courseAmount; i++) {
+    totalExercises += exercises[i]
+  }
+  return (
+    <>
+      <Header course={props.course.name} />
+      <Content parts={props.course.parts} />
+      <Total total={totalExercises}/>
+    </>
+  )
+}
 
 const Header = (props) => <h1>{props.course}</h1>
 
@@ -21,7 +31,7 @@ const Part = (props) => (
   </p>
 )
 
-const Total = (props) => <p>Number of exercises {props.total}</p>
+const Total = (props) => <b><p>Number of exercises {props.total}</p></b>
 
 const App = () => {
   const course = {
