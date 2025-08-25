@@ -6,13 +6,9 @@ const Name = ({ name, number }) => {
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas', number: '040-1234567' }
   ]) 
   const [newName, setNewName] = useState('')
-
-  const [numbers, setNumbers] = useState([
-    { number:'040-1234567' }
-  ])
   const [newNumber, setNewNumber] = useState('')
 
   const addContact = (event) => {
